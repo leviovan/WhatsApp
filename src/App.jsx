@@ -4,7 +4,7 @@ import Form from './components/form/Form'
 function App() {
   return (
   
-      <div >
+      <div className='main'>
       <Form/>
       </div>
   )

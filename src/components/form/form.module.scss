@@ -1,0 +1,41 @@
+form {
+    margin: 0 auto;
+    max-width: 300px;
+    display: flex;
+    flex-direction: column;
+
+    .header {
+        color: #00aa86;
+        font-size: 30px;
+        font-weight: 400;
+        text-align: center;
+    }
+
+    .label {
+        margin-bottom: 5px;
+    }
+
+    .field {
+        margin-bottom: 30px;
+        height: 25px;
+        font-size: 15px;
+        padding-left: 5px;
+        border-radius: 5px;
+    }
+
+    .sumbitBtn {
+        height: 50px;
+        width: 100%;
+        margin: 0 auto;
+        background-color: #00aa86;
+        border: none;
+        cursor: pointer;
+        font-size: 20px;
+        color: white;
+
+        &:active {
+            margin-top: 1px;
+
+        }
+    }
+}

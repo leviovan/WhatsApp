@@ -1,18 +1,24 @@
 import { Field, Form, Formik } from "formik"
 import style from "./form.module.scss"
+import { fetchUserById } from "../../redux/slice/authSlice"
+import { useDispatch, useSelector } from "react-redux"
 function Formm() {
+
+  const { id, apiTocken } = useSelector((state) => state.auth)
+  const dispatch = useDispatch()
+
   return (
     <div className={style.form}>
-        <Formik initialValues={{id:"", apiToken:"", number:"", message:""} } onSubmit={()=>{console.log("----------------------")}}> 
+        <Formik initialValues={{id:"", apiToken:""}} onSubmit={(values)=>dispatch(fetchUserById(values))}> 
        
         {({errors, touched})=>(
-            <Form>
-              <label htmlFor="id">  Ваш Id </label>
+            <Form className={style.form}> 
+              <h3 className={style.header}> Введите данные greenApi</h3>
+              <label className={style.label} htmlFor="id">  Ваш Id </label>
               <Field id="id" name="id" placeholder="Ваш id " className={style.field} />
-              <br />
-              <label htmlFor="apiToken)">  Ваш api Token</label>
-              <Field id="apiToken)" name="apiToken)" placeholder="Ваш id " className={style.field} />
-              <button type="submit">Отправить</button>
+              <label  className={style.label} htmlFor="apiToken">  Ваш api Token</label>
+              <Field id="apiToken" name="apiToken" placeholder="Ваш api Token " className={style.field} />
+              <button className={style.sumbitBtn} type="submit">Войти </button>
             </Form>
         )}
         </Formik>
