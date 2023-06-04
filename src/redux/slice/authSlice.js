@@ -4,13 +4,13 @@ import axios from 'axios'
 const initialState = {
     id: "",
     apiTocken: "",
+    auth: false
 }
 
 export const fetchUserById = createAsyncThunk(
-    'users/fetchAuthStatus',
+    'auth/fetchAuthStatus',
     async (values, thunkAPI) => {
-        console.log(values);
-        const response = await axios.get('https://api.green-api.com/waInstance{va}/getStateInstance/3c3951fdc67a420b8b7e8a5ce7f657c3aa2d45e3951343e28d')
+        const response = await axios.get(`https://api.green-api.com/waInstance${values.id}/getStateInstance/${values.apiToken}`)
         return response.data
     }
 )
@@ -18,23 +18,26 @@ export const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
-
     },
     extraReducers: (builder) => {
-        // Add reducers for additional action types here, and handle loading state as needed
+
         builder.addCase(fetchUserById.fulfilled, (state, action) => {
             console.log("da");
+            console.log(action);
+            state.id = action.meta.arg.id
+            state.apiTocken = action.meta.arg.apiToken
+            state.auth = true
         })
         builder.addCase(fetchUserById.pending, (state, action) => {
-            console.log("wait");
+            console.log("wait", action);
+            state.auth = false
         })
         builder.addCase(fetchUserById.rejected, (state, action) => {
             console.log("error");
+            state.auth = false
         })
     }
 })
-
-// Action creators are generated for each case reducer function
 export const { } = authSlice.actions
 
 export default authSlice.reducer
